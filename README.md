@@ -1,5 +1,5 @@
 # ai-recipes
-The goal of this project is to create a maps application which accepts a destination name and the application by default will return the closest destination with the given name and also the most fuel efficient way of traveling to the location (with the help of AI).
+The goal of this project is to create a recipe web appication where we input a dish and it will output ingredients as well as directions for the dish.
 
 
 Team Members:
