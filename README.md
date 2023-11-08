@@ -4,3 +4,4 @@ The goal of this project is to create a maps application which accepts a destina
 
 Team Members:
 -Brian Demyan
+-Deni Velasquez
