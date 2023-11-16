@@ -1,0 +1,50 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff; /* or any light pastel color */
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    text-align: center;
+}
+
+.logo img {
+    max-width: 100px; /* Adjust as necessary */
+    margin-bottom: 20px;
+}
+
+.search-bar input[type="text"] {
+    width: 100%; /* Adjust width as necessary */
+    padding: 10px;
+    border: 1px solid #ddd; /* Light grey border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px; /* Larger font size for readability */
+}
+
+.search-bar button {
+    padding: 10px;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50; /* Green background */
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.search-bar button:hover {
+    background-color: #45a049;
+}
+
+/* Add some hover effect */
+.search-bar input[type="text"]:hover {
+    border-color: #aaa; /* Darker border on hover */
+}

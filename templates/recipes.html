@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cooking Search</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <!-- Replace with your logo -->
+            <img src="logo.png" alt="Cooking Logo">
+        </div>
+        <div class="search-bar">
+            <form id="searchForm">
+                <input type="text" id="searchInput" placeholder="What would you like to cook?">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="resultsContainer" class="container">
+        <!-- Results will be dynamically added here -->
+    </div>
+
+    <script>
+        document.getElementById('searchForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const searchQuery = document.getElementById('searchInput').value;
+            
+            fetch('http://127.0.0.1:5000/search', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ query: searchQuery })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                // Handle the response data here
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        });
+
+        function displaySearchResults(data) {
+            // Assuming there is a container with the id "resultsContainer" in your HTML
+            const resultsContainer = document.getElementById('resultsContainer');
+            resultsContainer.innerHTML = '';  // Clear previous results
+
+            if (data.success) {
+                // Loop through the received recipes and append them to the container
+                data.data.forEach(recipe => {
+                    const recipeDiv = document.createElement('div');
+                    recipeDiv.textContent = `Title: ${recipe.title}, Description: ${recipe.description}`;
+                    resultsContainer.appendChild(recipeDiv);
+                });
+            } else {
+                // Display an error message
+                const errorDiv = document.createElement('div');
+                errorDiv.textContent = `Error: ${data.message}`;
+                resultsContainer.appendChild(errorDiv);
+            }
+        }
+    </script>
+</body>
+</html>
