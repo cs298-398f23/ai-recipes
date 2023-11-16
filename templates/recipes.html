@@ -18,9 +18,9 @@
                 <button type="submit">Search</button>
             </form>
         </div>
-    </div>
 
-    <div id="resultsContainer" class="container">
+        <div id="resultsContainer" class="container results-container">
+        </div>
     </div>
 
     <script>
@@ -55,7 +55,7 @@
                 // Loop through the received recipes and append them to the container
                 data.data.forEach(recipe => {
                     const recipeDiv = document.createElement('div');
-                    recipeDiv.textContent = `Title: ${recipe.title}, Description: ${recipe.description}`;
+                    recipeDiv.textContent = `${recipe.title}, ${recipe.description}`;
                     resultsContainer.appendChild(recipeDiv);
                 });
             } else {

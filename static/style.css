@@ -48,3 +48,17 @@ body, html {
 .search-bar input[type="text"]:hover {
     border-color: #aaa; /* Darker border on hover */
 }
+
+.results-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.results-container div {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
