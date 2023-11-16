@@ -26,9 +26,9 @@
     <script>
         document.getElementById('searchForm').addEventListener('submit', function(event) {
             event.preventDefault();
-
+    
             const searchQuery = document.getElementById('searchInput').value;
-            
+    
             fetch('http://127.0.0.1:5000/search', {
                 method: 'POST',
                 headers: {
@@ -39,17 +39,18 @@
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
-                // Handle the response data here
+                // Call the displaySearchResults function to handle and display the results
+                displaySearchResults(data);
             })
             .catch((error) => {
                 console.error('Error:', error);
             });
         });
-
+    
         function displaySearchResults(data) {
             const resultsContainer = document.getElementById('resultsContainer');
             resultsContainer.innerHTML = '';  // Clear previous results
-
+    
             if (data.success) {
                 // Loop through the received recipes and append them to the container
                 data.data.forEach(recipe => {
@@ -65,5 +66,6 @@
             }
         }
     </script>
+    
 </body>
 </html>
