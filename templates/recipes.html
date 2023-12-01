@@ -55,7 +55,11 @@
                 // Loop through the received recipes and append them to the container
                 data.data.forEach(recipe => {
                     const recipeDiv = document.createElement('div');
-                    recipeDiv.textContent = `${recipe.title}, ${recipe.description}`;
+                    recipeDiv.innerHTML = `
+                        <h3>${recipe.title}</h3>
+                        <p>${recipe.NER}</p>
+                        <p><a href="${recipe.link}" target="_blank">${recipe.link}</a></p>
+                    `;
                     resultsContainer.appendChild(recipeDiv);
                 });
             } else {
@@ -64,6 +68,11 @@
                 errorDiv.textContent = `Error: ${data.message}`;
                 resultsContainer.appendChild(errorDiv);
             }
+        }
+
+        // Helper function to remove double quotes from a string
+        function removeQuotes(str) {
+            return str.replace(/"/g, '');
         }
     </script>
     
