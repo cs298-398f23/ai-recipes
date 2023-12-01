@@ -46,8 +46,9 @@ def search_recipes(keyword):
         connection = get_db_connection()
         cursor = connection.cursor(dictionary=True)
 
-        query = "SELECT * FROM recipes WHERE LOWER(title) LIKE %s OR LOWER(description) LIKE %s"
-        cursor.execute(query, ('%' + keyword.lower() + '%', '%' + keyword.lower() + '%'))
+        # Updated query to match your database structure
+        query = "SELECT * FROM recipes WHERE LOWER(title) LIKE %s OR LOWER(NER) LIKE %s OR LOWER(link) LIKE %s"
+        cursor.execute(query, ('%' + keyword.lower() + '%', '%' + keyword.lower() + '%', '%' + keyword.lower() + '%'))
 
         recipes = cursor.fetchall()
         return recipes
