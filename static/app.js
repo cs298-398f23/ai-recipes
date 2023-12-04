@@ -40,8 +40,8 @@ function displaySearchResults(data) {
             const absoluteLink = recipe.link.startsWith('http') ? recipe.link : `http://${recipe.link}`;
 
             recipeDiv.innerHTML = `
-                <h3>${removeQuotes(recipe.title)}</h3>
-                <p>${removeQuotes(recipe.NER)}</p>
+                <h3>${(recipe.title)}</h3>
+                <p>${(recipe.NER)}</p>
                 <p><a href="${absoluteLink}" target="_blank">${recipe.link}</a></p>
             `;
             resultsContainer.appendChild(recipeDiv);
