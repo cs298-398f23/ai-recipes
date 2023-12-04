@@ -56,7 +56,7 @@ Before you begin, make sure you have the following installed:
 
 1. Prepare your recipe data in CSV format. Ensure that the CSV file has columns: `title`, `NER`, and `link`.
 
-2. Save the CSV file as `formatted_file.csv` in the project directory.
+2. Save the CSV file as `formatted_file.csv` in the project directory. (Dataset is already provided)
 
 3. Run the data import script:
 
