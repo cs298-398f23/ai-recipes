@@ -4,7 +4,8 @@ After=network-online.target
 Wants=network-online.target
 
 [Service]
-ExecStart=/home/ec2-user/ai-recipes/.venv/bin/gunicorn --chdir /home/ec2-user/ai-recipes --bind 0.0.0.0:80 "app:app"
+ExecStart=/home/ec2-user/ai-recipes/.venv/bin/gunicorn --chdir /home/ec2-user/ai-recipes -c /home/ec2-user/ai-recipes/gunicorn_config.py "app:app"
+
 
 [Install]
 WantedBy=multi-user.target
