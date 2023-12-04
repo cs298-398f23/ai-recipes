@@ -82,7 +82,6 @@ Before you begin, make sure you have the following installed:
 - Enter keywords in the search bar to find recipes containing the specified keywords.
 - The results will be displayed, including the recipe title, ingredients (NER), and a link to the recipe details.
 
-=========================================
 
 # AI Recipes API Documentation
 
