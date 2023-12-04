@@ -62,6 +62,8 @@ Before you begin, make sure you have the following installed:
 3. Run the data import script:
 
    ```
+   pip install --upgrade mysql-connector-python
+   ```
    python import_data.py
    ```
 
@@ -79,3 +81,83 @@ Before you begin, make sure you have the following installed:
 
 - Enter keywords in the search bar to find recipes containing the specified keywords.
 - The results will be displayed, including the recipe title, ingredients (NER), and a link to the recipe details.
+
+
+# AI Recipes API Documentation
+
+This API provides endpoints to search for recipes stored in a MySQL database. Users can send search queries to retrieve matching recipes.
+
+## Search Recipes
+
+### Endpoint
+
+`POST /search`
+
+### Request
+
+- **URL:** http://127.0.0.1:5000/search
+- **Method:** POST
+- **Headers:**
+  - Content-Type: application/json
+- **Body:**
+  - JSON object with the following properties:
+    - `query`: (string) The search query.
+
+**Example:**
+
+```json
+{
+  "query": "chicken"
+}
+```
+
+### Response
+
+- **Success Response:**
+  - **Status Code:** 200 OK
+  - **Body:**
+    - JSON object with the following properties:
+      - `success`: (boolean) Indicates if the request was successful.
+      - `data`: (array) List of recipes matching the search query.
+        - Each recipe object contains:
+          - `title`: (string) Recipe title.
+          - `NER`: (string) Ingredients or Named Entity Recognition.
+          - `link`: (string) Link to the recipe details.
+
+**Example:**
+
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "title": "Chicken Parmesan",
+      "NER": "chicken, tomato sauce, cheese, pasta",
+      "link": "www.cookbooks.com/recipe/chicken-parmesan"
+    },
+    {
+      "title": "Grilled Lemon Herb Chicken",
+      "NER": "chicken, lemon, herbs",
+      "link": "www.cookbooks.com/recipe/grilled-lemon-herb-chicken"
+    }
+  ]
+}
+```
+
+- **Error Response:**
+  - **Status Code:** 200 OK
+  - **Body:**
+    - JSON object with the following properties:
+      - `success`: (boolean) Indicates if the request was successful.
+      - `message`: (string) Error message.
+
+**Example:**
+
+```json
+{
+  "success": false,
+  "message": "No recipes found"
+}
+```
+
+---
