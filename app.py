@@ -3,7 +3,8 @@ import mysql.connector
 from dotenv import load_dotenv
 import os
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static')
+
 
 load_dotenv()
 
@@ -25,14 +26,19 @@ def home():
     return render_template('recipes.html')
 
 # API route for handling search requests
-@app.route('/search', methods=['POST'])
+@app.route('/search', methods=['GET'])
 def search():
     try:
-        data = request.json
-        keyword = data.get('query', '')
-        
+        page = int(request.args.get('page', 1))  # Get the requested page or default to 1
+        items_per_page = 10  # Number of items per page
+
+        # Calculate the offset based on the requested page
+        offset = (page - 1) * items_per_page
+
+        keyword = request.args.get('query', '')  # Retrieve the query parameter
+
         if keyword:
-            recipes = search_recipes(keyword)
+            recipes = search_recipes(keyword, offset, items_per_page)
             return jsonify({'success': True, 'data': recipes})
         else:
             return jsonify({'success': False, 'message': 'No keyword provided'})
@@ -40,22 +46,32 @@ def search():
     except Exception as e:
         return jsonify({'success': False, 'message': str(e)})
 
+
 # Function to search recipes in the database
-def search_recipes(keyword):
+# Function to search recipes in the database
+def search_recipes(keyword, offset, limit):
+    connection = None
+    cursor = None
     try:
         connection = get_db_connection()
         cursor = connection.cursor(dictionary=True)
 
         # Updated query to match your database structure
-        query = "SELECT * FROM recipes WHERE LOWER(title) LIKE %s OR LOWER(NER) LIKE %s OR LOWER(link) LIKE %s"
-        cursor.execute(query, ('%' + keyword.lower() + '%', '%' + keyword.lower() + '%', '%' + keyword.lower() + '%'))
-
+        query = "SELECT * FROM recipes WHERE LOWER(title) LIKE %s OR LOWER(NER) LIKE %s OR LOWER(link) LIKE %s LIMIT %s OFFSET %s"
+        cursor.execute(query, ('%' + keyword.lower() + '%', '%' + keyword.lower() + '%', '%' + keyword.lower() + '%', limit, offset))
         recipes = cursor.fetchall()
         return recipes
 
+    except Exception as e:
+        print(f'Error: {e}')
+        return []
+
     finally:
-        cursor.close()
-        connection.close()
+        if cursor is not None:
+            cursor.close()
+        if connection is not None:
+            connection.close()
+
 
 if __name__ == '__main__':
     app.run(debug=True)

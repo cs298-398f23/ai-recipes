@@ -10,9 +10,6 @@ body, html {
     font-family: Arial, sans-serif;
 }
 
-.container {
-    text-align: center;
-}
 
 .logo img {
     max-width: 100px; /* Adjust as necessary */
@@ -49,11 +46,6 @@ body, html {
     border-color: #aaa; /* Darker border on hover */
 }
 
-.results-container {
-    text-align: center;
-    margin-top: 20px;
-}
-
 .results-container div {
     margin-bottom: 20px;
     padding: 15px;
@@ -61,4 +53,14 @@ body, html {
     border-radius: 5px;
     background-color: #f9f9f9;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.container {
+    position: relative; /* Make the container a positioning context */
+    min-height: 50vh; /* Set a minimum height to fill the viewport */
+    display: flex;
+    flex-direction: column; /* Stack child elements vertically */
+}
+
+#paginationControls {
+    margin-top: auto; /* Push the pagination controls to the bottom */
 }
