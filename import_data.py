@@ -11,7 +11,7 @@ db_config = {
     'host': os.getenv('DB_HOST'),
     'user': os.getenv('DB_USER'),
     'password': os.getenv('DB_PASSWORD'),
-    'database': os.getenv('DB_DATABASE'),
+    'database': os.getenv('DB_NAME'),
 }
 
 # Function to connect to the MySQL database
@@ -30,7 +30,12 @@ def create_recipes_table(cursor):
     """)
 
 # Function to import data from a CSV file to the recipes table
+
+
+# Function to import data from a CSV file to the recipes table
 def import_data_to_mysql():
+    connection = None  # Initialize connection to None
+    cursor = None  # Initialize cursor to None
     try:
         connection = get_db_connection()
         cursor = connection.cursor()
@@ -56,8 +61,10 @@ def import_data_to_mysql():
         print(f'Error: {e}')
 
     finally:
-        cursor.close()
-        connection.close()
+        if cursor is not None:
+            cursor.close()
+        if connection is not None:
+            connection.close()
 
 # Run the data import script
 if __name__ == '__main__':
