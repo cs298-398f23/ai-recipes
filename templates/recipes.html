@@ -48,32 +48,36 @@
         });
     
         function displaySearchResults(data) {
-            const resultsContainer = document.getElementById('resultsContainer');
-            resultsContainer.innerHTML = '';  // Clear previous results
-    
-            if (data.success) {
-                // Loop through the received recipes and append them to the container
-                data.data.forEach(recipe => {
-                    const recipeDiv = document.createElement('div');
-                    recipeDiv.innerHTML = `
-                        <h3>${recipe.title}</h3>
-                        <p>${recipe.NER}</p>
-                        <p><a href="${recipe.link}" target="_blank">${recipe.link}</a></p>
-                    `;
-                    resultsContainer.appendChild(recipeDiv);
-                });
-            } else {
-                // Display an error message
-                const errorDiv = document.createElement('div');
-                errorDiv.textContent = `Error: ${data.message}`;
-                resultsContainer.appendChild(errorDiv);
-            }
-        }
+        const resultsContainer = document.getElementById('resultsContainer');
+        resultsContainer.innerHTML = '';  // Clear previous results
 
-        // Helper function to remove double quotes from a string
-        function removeQuotes(str) {
-            return str.replace(/"/g, '');
+        if (data.success) {
+            // Loop through the received recipes and append them to the container
+            data.data.forEach(recipe => {
+                const recipeDiv = document.createElement('div');
+
+                // Ensure the link is an absolute URL
+                const absoluteLink = recipe.link.startsWith('http') ? recipe.link : `http://${recipe.link}`;
+                
+                recipeDiv.innerHTML = `
+                    <h3>${removeQuotes(recipe.title)}</h3>
+                    <p>${removeQuotes(recipe.NER)}</p>
+                    <p><a href="${absoluteLink}" target="_blank">${recipe.link}</a></p>
+                `;
+                resultsContainer.appendChild(recipeDiv);
+            });
+        } else {
+            // Display an error message
+            const errorDiv = document.createElement('div');
+            errorDiv.textContent = `Error: ${data.message}`;
+            resultsContainer.appendChild(errorDiv);
         }
+    }
+
+    // Helper function to remove double quotes from a string
+    function removeQuotes(str) {
+        return str.replace(/"/g, '');
+    }
     </script>
     
 </body>
