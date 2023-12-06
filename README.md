@@ -64,6 +64,7 @@ Before you begin, make sure you have the following installed:
    ```
    pip install --upgrade mysql-connector-python
    ```
+   ```
    python import_data.py
    ```
 
