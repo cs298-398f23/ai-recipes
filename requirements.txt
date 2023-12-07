@@ -2,5 +2,5 @@ flask
 gunicorn
 pytest
 mysql.connector
-pyton-dotenv
+python-dotenv
 gunicorn
