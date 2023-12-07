@@ -3,4 +3,3 @@ gunicorn
 pytest
 mysql.connector
 python-dotenv
-gunicorn
