@@ -4,20 +4,21 @@ body, html {
     width: 100%;
     height: 100%;
     display: flex;
+    flex-direction: column; /* Stack child elements vertically */
     justify-content: center;
     align-items: center;
-    background-color: #ffffff; /* or any light pastel color */
+    background-color: #fdbc72; /* or any light pastel color */
     font-family: Arial, sans-serif;
 }
 
 
 .logo img {
-    max-width: 100px; /* Adjust as necessary */
-    margin-bottom: 20px;
+    max-width: 150px; /* Adjust as necessary */
+    margin-bottom: 30px;
 }
 
 .search-bar input[type="text"] {
-    width: 100%; /* Adjust width as necessary */
+    flex-grow: 1; /* Allow the input to grow and take available space */
     padding: 10px;
     border: 1px solid #ddd; /* Light grey border */
     border-radius: 5px; /* Rounded corners */
@@ -41,6 +42,10 @@ body, html {
     background-color: #45a049;
 }
 
+.search-bar {
+    display: flex; /* Display search bar and button side by side */
+    align-items: center;
+}
 /* Add some hover effect */
 .search-bar input[type="text"]:hover {
     border-color: #aaa; /* Darker border on hover */
@@ -62,5 +67,11 @@ body, html {
 }
 
 #paginationControls {
-    margin-top: auto; /* Push the pagination controls to the bottom */
+    position: fixed; /* Make the pagination controls fixed at the top */
+    bottom: 0; /* Position at the bottom of the viewport */
+    width: 100%; /* Make it span the full width of the viewport */
+    background-color: #fff; /* Background color for the pagination controls */
+    z-index: 1; /* Ensure it's above other content */
+    padding: 10px; /* Add padding as needed */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add shadow for styling */
 }
