@@ -41,7 +41,7 @@ def import_data_to_mysql():
         create_recipes_table(cursor)
 
         # Read data from the CSV file and insert into the recipes table
-        with open('test_file.csv', 'r') as csv_file:
+        with open('tests/test_file.csv', 'r') as csv_file:
             csv_reader = csv.reader(csv_file)
             next(csv_reader)  # Skip header row
 
